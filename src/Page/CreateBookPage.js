@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-
+import BookService from "../Services/BookService";
 export default class CreateBook extends Component {
   constructor(props) {
     super(props);
@@ -42,6 +42,13 @@ export default class CreateBook extends Component {
       price: this.state.price,
     };
 
+    BookService.create(data)
+      .then(() => {
+        this.props.history.goBack();
+      })
+      .catch((error) => {
+        console.error(error);
+      });
     // TODO: Call API to Create a new book
   }
 

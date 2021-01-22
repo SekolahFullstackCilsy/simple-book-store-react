@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-
+import BookService from "../Services/BookService";
 export default class Book extends Component {
   constructor(props) {
     super(props);
@@ -62,14 +62,48 @@ export default class Book extends Component {
 
   getBook(id) {
     // TODO: Call API to Get a book by id
+    BookService.retrieveById(id)
+      .then((response) => {
+        const data = response.data;
+        this.setState({
+          currentBook: data,
+        });
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   }
 
   updateBook() {
+    BookService.update(this.state.currentBook.id, {
+      title: this.state.currentBook.title,
+      description: this.state.currentBook.description,
+      price: this.state.currentBook.price,
+    })
+      .then((response) => {
+        this.setState({
+          message: "Data updated successfully",
+        });
+      })
+      .catch((error) => {
+        this.setState({
+          message: "Error when updating data" + error,
+        });
+      });
     // TODO: Call API to Update book
   }
 
   deleteBook() {
     // TODO:Call API to delete book
+    BookService.delete(this.state.currentBook.id)
+      .then((response) => {
+        this.props.history.goBack();
+      })
+      .catch((error) => {
+        this.setState({
+          message: "Error when deleting data" + error,
+        });
+      });
   }
 
   render() {

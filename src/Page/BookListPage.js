@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import BookService from "../Services/BookService";
 
 export default class BooksList extends Component {
   constructor(props) {
@@ -31,6 +32,16 @@ export default class BooksList extends Component {
   }
 
   retrieveBooks() {
+    BookService.retrieveAll()
+      .then((response) => {
+        const data = response.data;
+        this.setState({
+          Books: data,
+        });
+      })
+      .catch((error) => {
+        console.error(error);
+      });
     // TODO: Call API to Retrieve all books
   }
 
@@ -55,6 +66,16 @@ export default class BooksList extends Component {
       currentIndex: -1,
     });
 
+    BookService.searchByTitle(this.state.searchTitle)
+      .then((response) => {
+        const data = response.data;
+        this.setState({
+          Books: data,
+        });
+      })
+      .catch((error) => {
+        console.error(error);
+      });
     // TODO: Call API to search books by title
   }
 
