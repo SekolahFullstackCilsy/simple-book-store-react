@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import BookDataService from "../Services/BookService";
 
 export default class Book extends Component {
   constructor(props) {
@@ -62,43 +61,15 @@ export default class Book extends Component {
   }
 
   getBook(id) {
-    BookDataService.get(id)
-      .then((response) => {
-        this.setState({
-          currentBook: response.data,
-        });
-        console.log(response.data);
-      })
-      .catch((e) => {
-        console.log(e);
-      });
+    // TODO: Call API to Get a book by id
   }
 
   updateBook() {
-    BookDataService.update(this.state.currentBook.id, this.state.currentBook)
-      .then((response) => {
-        console.log(response.data);
-        this.setState({
-          message: "The Book was updated successfully!",
-        });
-      })
-      .catch((e) => {
-        console.log(e);
-      });
+    // TODO: Call API to Update book
   }
 
   deleteBook() {
-    BookDataService.delete(this.state.currentBook.id)
-      .then((response) => {
-        console.log(response.data);
-        this.props.history.goBack();
-      })
-      .catch((e) => {
-        this.setState({
-          message: "Error when deleting a book",
-        });
-        console.log(e);
-      });
+    // TODO:Call API to delete book
   }
 
   render() {

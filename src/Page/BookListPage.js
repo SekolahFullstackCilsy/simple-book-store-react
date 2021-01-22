@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import BookDataService from "../Services/BookService";
 import { Link } from "react-router-dom";
 
 export default class BooksList extends Component {
@@ -32,16 +31,7 @@ export default class BooksList extends Component {
   }
 
   retrieveBooks() {
-    BookDataService.getAll()
-      .then((response) => {
-        this.setState({
-          Books: response.data,
-        });
-        console.log(response.data);
-      })
-      .catch((e) => {
-        console.log(e);
-      });
+    // TODO: Call API to Retrieve all books
   }
 
   refreshList() {
@@ -65,16 +55,7 @@ export default class BooksList extends Component {
       currentIndex: -1,
     });
 
-    BookDataService.findByTitle(this.state.searchTitle)
-      .then((response) => {
-        this.setState({
-          Books: response.data,
-        });
-        console.log(response.data);
-      })
-      .catch((e) => {
-        console.log(e);
-      });
+    // TODO: Call API to search books by title
   }
 
   render() {
